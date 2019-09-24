@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="container">
+    <br/><br/><br/><br/><br/><br/>
+    <div class="row">
+      <div class="col-lg">
+          <center><h><b>OAuth 2.0 Login</b></h></center>
+      </div>
+      </div>
+      <br/>
+      <div class="row">
+          <div class="col-lg">
+              <center>
+                  <button type="button" class="btn btn-primary" onclick="onClickLogin()">
+                    Login with your Github
+                  </button>
+              </center>
+          </div>
+          </div>
+    </div>
+  </div>
+</body>
+<script>
+  function onClickLogin() {
+    window.location.href = "https://github.com/login/oauth/authorize?client_id=8e0ccad1a139fb2a0413"
+  }
+</script>
+</html>

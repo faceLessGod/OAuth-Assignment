@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>OAuth Home Page</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<div class="container">
+		<br/><br/>
+		<div class="row">
+			<div class="col-lg">
+				<div class="alert alert-primary" role="alert">
+					<center><h1><b>Welcome to your profile</b></Welcome></h1></center>
+				</div>
+			</div>
+		</div>
+		<br/>
+		<div class="row" hidden id="spinner">
+			<div class="col-lg">
+
+			</div>
+			<div class="col-lg">
+				<div class="spinner-border m-5 text-primary" role="status">
+					<span class="sr-only">Loading...</span>
+				</div>
+			</div>
+			<div class="col-lg">
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg">
+				<form>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Name</label>
+						<input type="text" class="form-control" id="Name" aria-describedby="emailHelp" placeholder="Name" disabled>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Number Of Followers</label>
+						<input type="number" class="form-control" id="Followers" aria-describedby="emailHelp" placeholder="Number Of Followers" disabled>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Following</label>
+						<input type="number" class="form-control" id="Following" aria-describedby="emailHelp" placeholder="Following" disabled>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Number Of Public Repos</label>
+						<input type="number" class="form-control" id="Repos" aria-describedby="emailHelp" placeholder="Number Of vPublic Repos" disabled>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Email</label>
+						<input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="email" disabled>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script>
+	const query = window.location.search.substring(1)
+	console.log(query)
+  	const token = query.split('access_token=')[1]
+	console.log(token)
+	document.getElementById("spinner").hidden = false
+
+	fetch('https://api.github.com/user', {
+			headers: {
+				Authorization: 'token ' + token
+			}
+		})
+		.then(res => res.json())
+		.then(res => {
+			console.log(res)
+			document.getElementById("Name").value = res.login;
+			document.getElementById("Followers").value = res.followers;
+			document.getElementById("Following").value = res.following;
+			document.getElementById("Repos").value = res.public_repos;
+			document.getElementById("Email").value = res.email;	
+
+			document.getElementById("spinner").hidden = true
+		})
+</script>
+
+</html>
